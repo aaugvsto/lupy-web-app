@@ -1,0 +1,37 @@
+<div id="sidebar">
+    <ul class="list-group">
+        <li *ngFor="let menuItem of menuItems" class="list-group-item border-top-0 border-end-0 border-start-0 p-3 user-select-none" role="button">  
+            <ng-container *ngIf="!menuItem.subMenus">
+                <a [routerLink]="['/' + menuItem.route]" class="text-decoration-none">
+                    <i class="{{ menuItem.faIcon }}"></i>
+                    {{ menuItem.title }}
+                </a>
+            </ng-container>
+
+            <ng-container *ngIf="menuItem.subMenus">
+                <a 
+                class="text-decoration-none user-select-none" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#collapseExample" 
+                aria-expanded="false" 
+                aria-controls="collapseExample"
+                >
+                <i class="{{menuItem.faIcon}}"></i>
+                {{ menuItem.title }}
+                </a>
+                <ul class="collapse list-group user-select-none" id="collapseExample">
+                    <li class="list-group-item border-0 p-0 ms-4 mt-2" *ngFor="let subMenu of menuItem.subMenus">
+                        <a 
+                        [routerLink]="['/' + menuItem.route]"
+                        class="text-decoration-none"
+                        >
+                            <i class="{{subMenu.faIcon}}"></i>
+                            {{ subMenu.title }}
+                        </a>
+                    </li>
+                </ul>
+            </ng-container>
+        </li>
+    </ul>
+</div>
